@@ -85,3 +85,24 @@ Jenny/Generated/
 
 # Git
 !.gitattributes
+
+# User Settings
+/CometKicker/UserSettings/
+
+# Project Settings
+/CometKicker/ProjectSettings/
+
+# Resources Raw
+/CometKicker/Assets/ResourcesRaw/
+
+# Plugins
+/CometKicker/Assets/Plugins/
+
+# Generated
+# ==========================================
+# /PROJECTNAME/Assets/Code/Generated
+# ==========================================
+/CometKicker/Assets/Code/Generated/
+
+/CometKicker/SpaceDodge_BurstDebugInformation_DoNotShip/tempburstlibs/armeabi-v7a/lib_burst_generated.txt
+
