@@ -1,0 +1,87 @@
+# ==========================================
+# IDE
+# ==========================================
+# Visual Studio
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj*
+*.ncrunch*
+*.ncrunchsolution*
+
+# Rider
+*.DotSettings
+
+# JetBrains Rider & IntelliJ
+.idea/
+*.iml
+
+# ==========================================
+# Builds
+# ==========================================
+# Скомпилированные файлы
+bin/
+obj/
+*.dll
+*.exe
+*.log
+*.tmp
+
+# ==========================================
+# Operation Systems
+# ==========================================
+# Mac OS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# ==========================================
+# Unity
+# ==========================================
+# Unity-специфичные файлы
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Generated files
+*.apk
+*.aab
+*.unitypackage
+
+# Asset Bundles
+*.manifest
+*.asset
+
+
+# Jenny
+Jenny/Generated/
+
+
+# Git
+!.gitattributes
