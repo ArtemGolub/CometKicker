@@ -92,6 +92,9 @@ Jenny/Generated/
 # Project Settings
 /CometKicker/ProjectSettings/
 
+# meta
+*.meta
+
 # Plugins
 /CometKicker/Assets/Plugins/
 
