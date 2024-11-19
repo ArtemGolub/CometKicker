@@ -1,88 +1,101 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Code.Infrastructure.States.Factory;
 using Code.Infrastructure.States.StateInfrastructure;
-using RSG;
+using UnityEngine;
 using Zenject;
 
 namespace Code.Infrastructure.States.StateMachine
 {
-  public class GameStateMachine : IGameStateMachine, ITickable
-  {
-    private IExitableState _activeState;
-    private readonly IStateFactory _stateFactory;
-    private Type _activeStateType;
-
-    public GameStateMachine(IStateFactory stateFactory)
+    public class GameStateMachine : IGameStateMachine, ITickable
     {
-      _stateFactory = stateFactory;
+        private IExitableState _activeState;
+        private readonly IStateFactory _stateFactory;
+        private Type _activeStateType;
+
+        public GameStateMachine(IStateFactory stateFactory)
+        {
+            _stateFactory = stateFactory;
+        }
+
+        public void Tick()
+        {
+            if (_activeState is IUpdateable updateableState)
+            {
+                updateableState.Update();
+            }
+        }
+
+        public async Task Enter<TState>() where TState : class, IState
+        {
+            await RequestEnter<TState>();
+        }
+
+        public async Task Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        {
+            Debug.Log($"Entering state {typeof(TState).Name} with payload: {payload}"); // Лог для проверки
+            await RequestEnter<TState, TPayload>(payload);
+            Debug.Log($"State {typeof(TState).Name} activated."); // Проверяем активацию состояния
+        }
+
+
+
+        public bool CompareState<TState>() where TState : class, IState
+        {
+            return _activeStateType == typeof(TState);
+        }
+
+        private async Task<TState> RequestEnter<TState>() where TState : class, IState
+        {
+            var state = await RequestChangeState<TState>();
+            EnterState(state);
+            return state;
+        }
+
+        private async Task<TState> RequestEnter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        {
+            var state = await RequestChangeState<TState>();
+            EnterPayloadState(state, payload);
+            return state;
+        }
+
+        private void EnterState<TState>(TState state) where TState : class, IState
+        {
+            _activeState = state;
+            _activeStateType = typeof(TState);
+            state.Enter();
+        }
+
+        private void EnterPayloadState<TState, TPayload>(TState state, TPayload payload) where TState : class, IPayloadState<TPayload>
+        {
+            _activeState = state;
+            state.Enter(payload);
+        }
+
+        private async Task<TState> RequestChangeState<TState>() where TState : class, IExitableState
+        {
+            if (_activeState != null)
+            {
+                try
+                {
+                    await _activeState.BeginExitAsync();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error during state exit: {e.Message}");
+                }
+                _activeState.EndExit();
+            }
+
+            return ChangeState<TState>();
+        }
+
+        private TState ChangeState<TState>() where TState : class, IExitableState
+        {
+            var state = _stateFactory.GetState<TState>();
+            if (state == null)
+                Debug.LogError($"State of type {typeof(TState)} not found!");
+            return state;
+        }
     }
-
-    public void Tick()
-    {
-      if (_activeState is IUpdateable updateableState)
-      {
-        updateableState.Update();
-      }
-    }
-    
-    public void Enter<TState>() where TState : class, IState =>
-      RequestEnter<TState>()
-        .Done();
-    
-    public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload> =>
-      RequestEnter<TState, TPayload>(payload)
-        .Done();
-
-    
-    public bool CompareState<TState>() where TState : class, IState
-    {
-      return _activeStateType == typeof(TState);
-    }
-
-
-    private IPromise<TState> RequestEnter<TState>() where TState : class, IState =>
-      RequestChangeState<TState>()
-        .Then(EnterState);
-
-    private IPromise<TState> RequestEnter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload> =>
-      RequestChangeState<TState>()
-        .Then(state => EnterPayloadState(state, payload));
-    
-    private TState EnterState<TState>(TState state) where TState : class, IState
-    {
-      _activeState = state;
-      _activeStateType = typeof(TState);
-      state.Enter();
-      return state;
-    }
-
-    private TState EnterPayloadState<TState, TPayload>(TState state, TPayload payload) where TState : class, IPayloadState<TPayload>
-    {
-      _activeState = state;
-
-      state.Enter(payload);
-      return state;
-    }
-    
-    private IPromise<TState> RequestChangeState<TState>() where TState : class, IExitableState
-    {
-      if (_activeState != null)
-      {
-        return _activeState
-          .BeginExit()
-          .Then(_activeState.EndExit)
-          .Then(ChangeState<TState>);
-      }
-      
-      return ChangeState<TState>();
-    }
-
-
-    private IPromise<TState> ChangeState<TState>() where TState : class, IExitableState
-    {
-      TState state = _stateFactory.GetState<TState>();
-
-      return Promise<TState>.Resolved(state);
-    }
-  }
 }

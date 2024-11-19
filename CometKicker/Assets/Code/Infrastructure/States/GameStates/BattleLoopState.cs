@@ -28,15 +28,7 @@ namespace Code.Infrastructure.States.GameStates
         {
             _battleFeatureService.Activate();
         }        
-        // public override void Enter()
-        // {
-        //     Activate();
-        // }
-        // public void Activate()
-        // {
-        //     _battleFeature = _systems.Create<BattleFeature>(); 
-        //     _battleFeature.Initialize();
-        // }
+
         protected override void OnUpdate()
         {
             ProfilerHelper.ProfileAction("UpdateBattleFeature", () => UpdateBattleFeature());
@@ -47,40 +39,12 @@ namespace Code.Infrastructure.States.GameStates
             _battleFeatureService.Execute();
         }        
         
-        // private void UpdateBattleFeature()
-        // {
-        //     _battleFeature.Execute();
-        //     _battleFeature.Cleanup();
-        // }
 
         protected override void ExitOnEndOfFrame()
         {
          //  _battleFeatureService.Deactivate();
         }        
-        
-        // protected override void ExitOnEndOfFrame()
-        // {
-        //     _battleFeature.DeactivateReactiveSystems();
-        //     _battleFeature.ClearReactiveSystems();
-        //
-        //     DestructEntities();
-        //
-        //     _battleFeature.Cleanup();
-        //     _battleFeature.TearDown();
-        //     _battleFeature = null;
-        // }
-        // private void DestructEntities()
-        // {
-        //     foreach (GameEntity entity in _gameContext.GetEntities())
-        //     {
-        //         if (entity.isPersistent)
-        //         {
-        //             Debug.Log($"Ignore {entity.Id}");
-        //             continue;
-        //         }
-        //         entity.isDestructed = true;
-        //     }
-        // }
+
 
     }
 }

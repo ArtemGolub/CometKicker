@@ -1,23 +1,25 @@
-using RSG;
+using System.Threading.Tasks;
 
 namespace Code.Infrastructure.States.StateInfrastructure
 {
-  public class SimplePayloadState<TPayload> : IPayloadState<TPayload>
-  {
-    public virtual void Enter(TPayload payload)
+    public class SimplePayloadState<TPayload> : IPayloadState<TPayload>
     {
-    }
+        public virtual void Enter(TPayload payload)
+        {
+        }
 
-    protected virtual void Exit()
-    {
-    }
+        protected virtual void Exit()
+        {
+        }
 
-    IPromise IExitableState.BeginExit()
-    {
-      Exit();
-      return Promise.Resolved();
-    }
+        async Task IExitableState.BeginExitAsync()
+        {
+            Exit();
+            await Task.CompletedTask;
+        }
 
-    void IExitableState.EndExit(){}
-  }
+        void IExitableState.EndExit()
+        {
+        }
+    }
 }

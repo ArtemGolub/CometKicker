@@ -7,6 +7,7 @@ using Code.Gameplay.Levels;
 using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
 using Code.Infrastructure.Systems;
+using UnityEngine;
 
 namespace Code.Infrastructure.States.GameStates
 {
@@ -38,6 +39,7 @@ namespace Code.Infrastructure.States.GameStates
     
     public override void Enter()
     {
+      Debug.Log(" Battle Enter State Enter");
       PlaceHero();
       PlaceBackground();
       PlaceCamera();

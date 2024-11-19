@@ -29,11 +29,10 @@ namespace Code.Gameplay.Pause
             _gameStateMachine = gameStateMachine;
         }
         
-        public async void ReturnHome()
+        public void ReturnHome()
         {
             _audioFactory.CreateSound(SoundTypeId.BtnClick);
             _windowService.Close(_id);
-            await Task.Delay(100);
             _battleFeatureService.Deactivate();
             _gameStateMachine.Enter<LoadingHomeScreenState>();
         }

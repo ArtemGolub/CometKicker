@@ -1,10 +1,10 @@
-using RSG;
+using System.Threading.Tasks;
 
 namespace Code.Infrastructure.States.StateInfrastructure
 {
   public interface IExitableState
   {
-    IPromise BeginExit();
+    Task BeginExitAsync();
     void EndExit();
   }
 }

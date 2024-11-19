@@ -40,6 +40,7 @@ namespace Code.Meta.UI.HUD.HomeWindow
         {
             StartGameButton.interactable = false;
             _homeModel.EnterBattleLoadingState();
+            StartCoroutine(_homeModel.EnterBattleLoadingStateCoroutine());
         }
 
         private void OnSettingButton()

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using Code.Gameplay.Audio;
 using Code.Gameplay.Audio.Factory;
@@ -23,13 +24,18 @@ namespace Code.Meta.UI.HUD.HomeWindow
             _windowService = windowService;
         }
         
-        public async void EnterBattleLoadingState()
+        public void EnterBattleLoadingState()
         {
             _audioFactory.CreateSound(SoundTypeId.BtnClick);
             _windowService.Close(WindowId.HomeWindow);
-            await Task.Delay(100);
-            _stateMachine.Enter<LoadingBattleState, string>(BattleSceneName);
         }
+
+        public IEnumerator EnterBattleLoadingStateCoroutine()
+        {
+            Task enterStateTask = _stateMachine.Enter<LoadingBattleState, string>(BattleSceneName);
+            while (!enterStateTask.IsCompleted) yield return null;
+        }
+
 
         public void Settings()
         {

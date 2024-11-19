@@ -22,11 +22,10 @@ namespace Code.Gameplay.GameOver.UI
             _audioFactory = audioFactory;
         }
 
-        public async void ReturnHome()
+        public void ReturnHome()
         {
             _audioFactory.CreateSound(SoundTypeId.BtnClick);
             _windowService.Close(_id);
-            await Task.Delay(100);
             _gameStateMachine.Enter<LoadingHomeScreenState>();
         }
     }
