@@ -46,11 +46,7 @@ namespace Code.Gameplay
         {
             foreach (GameEntity entity in _gameContext.GetEntities())
             {
-                if (entity.isPersistent)
-                {
-                    Debug.Log($"Ignore persistent entity id: {entity.Id}");
-                    continue;
-                }
+                if (entity.isPersistent) continue;
                 entity.isDestructed = true;
             }
 

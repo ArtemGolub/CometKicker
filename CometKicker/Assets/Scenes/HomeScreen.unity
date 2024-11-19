@@ -491,11 +491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 196285595694249251, guid: 57c07881689e6431889c57fd4865a6a1, type: 3}
       propertyPath: m_ReferenceResolution.x
-      value: 1080
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 196285595694249251, guid: 57c07881689e6431889c57fd4865a6a1, type: 3}
       propertyPath: m_ReferenceResolution.y
-      value: 1920
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 445637680388909683, guid: 57c07881689e6431889c57fd4865a6a1, type: 3}
       propertyPath: m_Pivot.x
