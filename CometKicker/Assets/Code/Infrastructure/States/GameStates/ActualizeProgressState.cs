@@ -10,6 +10,7 @@ using Code.Progress.Data;
 using Code.Progress.Provider;
 using Code.Progress.SaveLoad;
 using UnityEngine;
+using YG;
 
 namespace Code.Infrastructure.States.GameStates
 {
@@ -20,7 +21,6 @@ namespace Code.Infrastructure.States.GameStates
     private readonly IProgressProvider _progressProvider;
     private readonly ISystemFactory _systemFactory;
     private ActualizationFeature _actualizationFeature;
-    private readonly TimeSpan _twoDays = TimeSpan.FromDays(2);
     private readonly ISaveLoadService _saveLoadService;
 
     

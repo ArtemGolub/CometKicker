@@ -1,0 +1,7 @@
+{
+  "idSave": 11,
+  "isFirstSession": false,
+  "language": "ru",
+  "promptDone": false,
+  "playerSave": "{\n  \"e\": {\n    \"es\": [\n      {\n        \"c\": [\n          {\n            \"$type\": \"Code.Gameplay.Score.CurrentScore, Assembly-CSharp\",\n            \"Value\": 0.0\n          },\n          {\n            \"$type\": \"Code.Gameplay.Score.MaxScore, Assembly-CSharp\",\n            \"Value\": 2.0\n          },\n          {\n            \"$type\": \"Code.Gameplay.Score.ScoreStorage, Assembly-CSharp\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+}

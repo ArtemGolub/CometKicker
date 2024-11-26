@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Infrastructure.States.StateInfrastructure
 {
@@ -12,10 +13,10 @@ namespace Code.Infrastructure.States.StateInfrastructure
         {
         }
 
-        async Task IExitableState.BeginExitAsync()
+        async UniTask IExitableState.BeginExitAsync()
         {
             Exit();
-            await Task.CompletedTask;
+            await UniTask.CompletedTask;
         }
 
         void IExitableState.EndExit()

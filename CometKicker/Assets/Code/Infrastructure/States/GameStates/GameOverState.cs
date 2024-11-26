@@ -4,6 +4,7 @@ using Code.Gameplay.Windows;
 using Code.Infrastructure.States.StateInfrastructure;
 using Code.Progress.SaveLoad;
 using UnityEngine;
+using YG;
 
 namespace Code.Infrastructure.States.GameStates
 {
@@ -28,6 +29,7 @@ namespace Code.Infrastructure.States.GameStates
       _battleFeatureService.Deactivate();
       _saveLoadService.SaveProgress();
       _windowService.Open(WindowId.GameOverWindow);
+      YandexGame.GameplayStop();
     }
 
     protected override void ExitOnEndOfFrame()

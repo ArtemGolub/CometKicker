@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using RSG;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Code.Infrastructure.States.StateInfrastructure
 {
     public class EndOfFrameExitState : IState, IUpdateable
     {
-        private TaskCompletionSource<bool> _exitCompletionSource;
+        private UniTaskCompletionSource<bool> _exitCompletionSource;
 
         protected bool ExitWasRequested =>
             _exitCompletionSource != null;
@@ -15,10 +16,10 @@ namespace Code.Infrastructure.States.StateInfrastructure
         {
         }
 
-        public Task BeginExitAsync()
+        public UniTask BeginExitAsync()
         {
-            _exitCompletionSource = new TaskCompletionSource<bool>();
-            return _exitCompletionSource.Task;
+            _exitCompletionSource = new UniTaskCompletionSource<bool>();
+            return _exitCompletionSource.Task.AsUniTask();
         }
 
 
@@ -40,9 +41,9 @@ namespace Code.Infrastructure.States.StateInfrastructure
 
         protected virtual void ExitOnEndOfFrame()
         {
-            Task.Run(async () =>
+            UniTask.Run(async () =>
             {
-                await Task.Yield();
+                await UniTask.Yield();
                 ResolveExitTask();
             });
         }
@@ -54,8 +55,8 @@ namespace Code.Infrastructure.States.StateInfrastructure
 
         private void ResolveExitTask()
         {
-            if (_exitCompletionSource != null && !_exitCompletionSource.Task.IsCompleted)
-                _exitCompletionSource.SetResult(true);
+            if (_exitCompletionSource != null && !_exitCompletionSource.Task.Status.IsCompleted())
+                _exitCompletionSource.TrySetResult(true);
         }
     }
 }

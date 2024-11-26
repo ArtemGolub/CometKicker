@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Threading.Tasks;
 using Code.Gameplay.Audio;
 using Code.Gameplay.Audio.Factory;
 using Code.Gameplay.Windows;
 using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Meta.UI.HUD.HomeWindow
@@ -32,8 +32,8 @@ namespace Code.Meta.UI.HUD.HomeWindow
 
         public IEnumerator EnterBattleLoadingStateCoroutine()
         {
-            Task enterStateTask = _stateMachine.Enter<LoadingBattleState, string>(BattleSceneName);
-            while (!enterStateTask.IsCompleted) yield return null;
+            UniTask enterStateTask = _stateMachine.Enter<LoadingBattleState, string>(BattleSceneName);
+            while (!enterStateTask.Status.IsCompleted()) yield return null;
         }
 
 

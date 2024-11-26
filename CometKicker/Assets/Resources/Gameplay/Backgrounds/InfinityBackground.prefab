@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5011480701042832624}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8021c8faec4d678cbeb25add1e0b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityView: {fileID: 4593008023826210449}
+  gameEntityView: {fileID: 4593008023826210449}
 --- !u!114 &2890050297010042614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051f9f9f0022940529262ce2f697a167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityView: {fileID: 4593008023826210449}
+  gameEntityView: {fileID: 4593008023826210449}
   MeshRenderer: {fileID: 8547328779614150372}
 --- !u!1 &8318231893719513039
 GameObject:

@@ -6,6 +6,7 @@ using Code.Gameplay.Score;
 using Code.Gameplay.TextureMovement;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.Views;
+using UnityEngine;
 
 namespace Code.Meta
 {
@@ -14,7 +15,7 @@ namespace Code.Meta
     public HomeScreenFeature(ISystemFactory systems)
     {
       //Add(systems.Create<PeriodicallySaveProgressSystem>(MetaConstants.SaveProgressPeriodSeconds));
-      
+      Debug.Log("Home screen feature Start Init");
       Add(systems.Create<BindViewFeature>());
       
       Add(systems.Create<AudioFeature>());
@@ -25,6 +26,7 @@ namespace Code.Meta
       Add(systems.Create<MovementFeature>());
       
       Add(systems.Create<ProcessDestructedFeature>());
+      Debug.Log("Home screen feature End Init");
       
     }
   }

@@ -1,6 +1,7 @@
 using Code.Gameplay.Windows;
 using Code.Infrastructure.States.StateInfrastructure;
 using UnityEngine;
+using YG;
 
 namespace Code.Infrastructure.States.GameStates
 {
@@ -17,6 +18,7 @@ namespace Code.Infrastructure.States.GameStates
         public override void Enter()
         {
             _windowService.Open(WindowId.PauseWindow);
+            YandexGame.GameplayStop();
         }
     }
 }

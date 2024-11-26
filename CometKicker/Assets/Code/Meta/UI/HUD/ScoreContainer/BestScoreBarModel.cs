@@ -4,10 +4,11 @@ namespace Code.Gameplay.UI
 {
     public class BestScoreBarModel
     {
-        private const string BestScore = "BEST SCORE: ";
+        private const string BestScoreENG = "BEST SCORE: ";
+        private const string BestScoreRUS = "Лучший счет: ";
         public string SetScore(float value)
         {
-            string scoreText = BestScore + value.ToString("");
+            string scoreText = BestScoreRUS + value.ToString("");
             return StringUpdater.UpdateString(scoreText);
         }
     }

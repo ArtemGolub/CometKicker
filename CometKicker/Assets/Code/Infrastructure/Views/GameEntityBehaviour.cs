@@ -1,3 +1,4 @@
+using System;
 using Code.Gameplay.Common.Collisions;
 using Code.Infrastructure.Views.Registrars;
 using UnityEngine;
@@ -14,7 +15,6 @@ namespace Code.Infrastructure.Views
         [Inject]
         private void Construct(ICollisionRegistry collisionRegistry) => 
             _collisionRegistry = collisionRegistry;
-
         
         public void SetEntity(GameEntity entity)
         {

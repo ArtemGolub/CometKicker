@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Code.Infrastructure.States.Factory;
 using Code.Infrastructure.States.StateInfrastructure;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -26,33 +26,30 @@ namespace Code.Infrastructure.States.StateMachine
             }
         }
 
-        public async Task Enter<TState>() where TState : class, IState
+        public async UniTask Enter<TState>() where TState : class, IState
         {
             await RequestEnter<TState>();
         }
 
-        public async Task Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        public async UniTask Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
         {
-            Debug.Log($"Entering state {typeof(TState).Name} with payload: {payload}"); // Лог для проверки
             await RequestEnter<TState, TPayload>(payload);
-            Debug.Log($"State {typeof(TState).Name} activated."); // Проверяем активацию состояния
         }
-
-
+        
 
         public bool CompareState<TState>() where TState : class, IState
         {
             return _activeStateType == typeof(TState);
         }
 
-        private async Task<TState> RequestEnter<TState>() where TState : class, IState
+        private async UniTask<TState> RequestEnter<TState>() where TState : class, IState
         {
             var state = await RequestChangeState<TState>();
             EnterState(state);
             return state;
         }
 
-        private async Task<TState> RequestEnter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        private async UniTask<TState> RequestEnter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
         {
             var state = await RequestChangeState<TState>();
             EnterPayloadState(state, payload);
@@ -72,7 +69,7 @@ namespace Code.Infrastructure.States.StateMachine
             state.Enter(payload);
         }
 
-        private async Task<TState> RequestChangeState<TState>() where TState : class, IExitableState
+        private async UniTask<TState> RequestChangeState<TState>() where TState : class, IExitableState
         {
             if (_activeState != null)
             {
@@ -86,7 +83,6 @@ namespace Code.Infrastructure.States.StateMachine
                 }
                 _activeState.EndExit();
             }
-
             return ChangeState<TState>();
         }
 

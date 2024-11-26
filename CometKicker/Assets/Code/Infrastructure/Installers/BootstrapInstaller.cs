@@ -38,7 +38,7 @@ using Code.Progress.Provider;
 using Code.Progress.SaveLoad;
 using RSG;
 using UnityEngine;
-
+using YG;
 using Zenject;
 
 namespace Code.Infrastructure.Installers

@@ -1,0 +1,2 @@
+Build path: /Users/otodr/src/CometKicker/src/Builds/CometKicker_YG
+Build number: 36

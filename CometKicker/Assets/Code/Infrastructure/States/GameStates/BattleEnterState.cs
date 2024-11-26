@@ -8,6 +8,7 @@ using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
 using Code.Infrastructure.Systems;
 using UnityEngine;
+using YG;
 
 namespace Code.Infrastructure.States.GameStates
 {
@@ -45,6 +46,7 @@ namespace Code.Infrastructure.States.GameStates
       PlaceCamera();
       
       _stateMachine.Enter<BattleLoopState>();
+      YandexGame.GameplayStart();
     }
 
     
